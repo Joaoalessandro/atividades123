@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Volume</title>
+</head>
+<body>
+    <h1>Calculadora de Volume</h1>
+    
+    <div>
+        <label for="base">base:</label>
+        <input type="number" id="base" step="0.1" min="0" max="10">
+    </div>
+    
+    <div>
+        <label for="altura">altura:</label>
+        <input type="number" id="altura" step="0.1" min="0" max="10">
+    </div>
+    
+    <button onclick="calcularVolume()">Calcular Volume</button>
+    
+    <div id="resultado"></div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

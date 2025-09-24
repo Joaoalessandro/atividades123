@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Prestação em Atraso</title>
+</head>
+<body>
+    <h1>Calculadora de Prestação em Atraso</h1>
+    
+    <div>
+        <label for="valorPrestacao">Valor da Prestação (R$):</label>
+        <input type="number" id="valorPrestacao" step="0.01" min="0">
+    </div>
+    
+    <div>
+        <label for="taxaJuros">Taxa de Juros (%):</label>
+        <input type="number" id="taxaJuros" step="0.01" min="0">
+    </div>
+    
+    <div>
+        <label for="diasAtraso">Tempo de Atraso (dias):</label>
+        <input type="number" id="diasAtraso" min="0">
+    </div>
+    
+    <button onclick="calcularPrestacao()">Calcular Valor Atualizado</button>
+    
+    <div id="resultado"></div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

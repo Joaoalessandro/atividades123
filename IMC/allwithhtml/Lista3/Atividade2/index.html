@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renda de Jogo de Futebol</title>
+</head>
+<body>
+    <h1>Calculadora de Renda de Jogo de Futebol</h1>
+    
+    <div>
+        <label for="publicoTotal">Público Total:</label>
+        <input type="number" id="publicoTotal" min="0">
+    </div>
+    
+    <button onclick="calcularRendaJogo()">Calcular Renda</button>
+    
+    <div id="resultado2"></div>
+
+    <script>
+        function calcularRendaJogo() {
+            const publicoTotal = parseInt(document.getElementById('publicoTotal').value);
+            
+            if (isNaN(publicoTotal) || publicoTotal < 0) {
+                document.getElementById('resultado2').innerHTML = 
+                    'Por favor, digite um valor válido para o público total.';
+                return;
+            }
+            
+            const rendaPopular = publicoTotal * 0.10 * 5.00;
+            const rendaGeral = publicoTotal * 0.50 * 10.00;
+            const rendaArquibancada = publicoTotal * 0.30 * 20.00;
+            const rendaCadeiras = publicoTotal * 0.10 * 40.00;
+            const rendaTotal = rendaPopular + rendaGeral + rendaArquibancada + rendaCadeiras;
+            
+            document.getElementById('resultado2').innerHTML = 
+                `Renda Popular: R$ ${rendaPopular.toFixed(2)}<br>
+                 Renda Geral: R$ ${rendaGeral.toFixed(2)}<br>
+                 Renda Arquibancada: R$ ${rendaArquibancada.toFixed(2)}<br>
+                 Renda Cadeiras: R$ ${rendaCadeiras.toFixed(2)}<br>
+                 <br>
+                 Renda Total do Jogo: R$ ${rendaTotal.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

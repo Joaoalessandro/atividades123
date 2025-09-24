@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Salário de Vendedor</title>
+</head>
+<body>
+    <h1>Cálculo de Salário de Vendedor de TV</h1>
+    
+    <div>
+        <label for="salarioFixo">Salário Fixo (R$):</label>
+        <input type="number" id="salarioFixo" step="0.01" min="0">
+    </div>
+    
+    <div>
+        <label for="tvLCD">Quantidade de TVs LCD vendidas:</label>
+        <input type="number" id="tvLCD" min="0">
+    </div>
+    
+    <div>
+        <label for="tvLED">Quantidade de TVs LED vendidas:</label>
+        <input type="number" id="tvLED" min="0">
+    </div>
+    
+    <div>
+        <label for="tvPlasma">Quantidade de TVs Plasma vendidas:</label>
+        <input type="number" id="tvPlasma" min="0">
+    </div>
+    
+    <button onclick="calcularSalario()">Calcular Salário Total</button>
+    
+    <div id="resultado"></div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

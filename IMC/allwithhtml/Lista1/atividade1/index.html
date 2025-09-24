@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Viagem</title>
+</head>
+<body>
+    <h1>Calculadora de Custo de Viagem</h1>
+    
+    <div>
+        <label for="tempo">Tempo de viagem (horas):</label>
+        <input type="number" id="tempo" step="0.1" min="0">
+    </div>
+    
+    <div>
+        <label for="velocidade">Velocidade média (Km/h):</label>
+        <input type="number" id="velocidade" step="0.1" min="0">
+    </div>
+    
+    <button onclick="calcularCusto()">Calcular Custo</button>
+    
+    <div id="resultado"></div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

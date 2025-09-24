@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condição de Pagamento</title>
+</head>
+<body>
+    <h1>Cálculo de Pagamento de Produto</h1>
+    
+    <div>
+        <label for="precoEtiqueta">Preço do Produto (R$):</label>
+        <input type="number" id="precoEtiqueta" step="0.01" min="0">
+    </div>
+    
+    <div>
+        <label for="condicaoPagamento">Escolha a condição de pagamento:</label>
+        <select id="condicaoPagamento">
+            <option value="1">1 - À vista (dinheiro ou cheque) - 10% de desconto</option>
+            <option value="2">2 - À vista (cartão de crédito) - 5% de desconto</option>
+            <option value="3">3 - Em 2 vezes - preço normal, sem juros</option>
+            <option value="4">4 - Em 3 vezes - preço normal + 10% de juros</option>
+        </select>
+    </div>
+    
+    <button onclick="calcularPagamento()">Calcular Valor Final</button>
+    
+    <div id="resultado5"></div>
+
+    <script>
+        function calcularPagamento() {
+            const precoEtiqueta = parseFloat(document.getElementById('precoEtiqueta').value);
+            const condicao = document.getElementById('condicaoPagamento').value;
+            let precoFinal;
+            
+            if (isNaN(precoEtiqueta) || precoEtiqueta < 0) {
+                document.getElementById('resultado5').innerHTML = 'Por favor, digite um preço de produto válido.';
+                return;
+            }
+            
+            if (condicao === '1') {
+                precoFinal = precoEtiqueta * 0.90;
+            } else if (condicao === '2') {
+                precoFinal = precoEtiqueta * 0.95;
+            } else if (condicao === '3') {
+                precoFinal = precoEtiqueta;
+            } else if (condicao === '4') {
+                precoFinal = precoEtiqueta * 1.10;
+            }
+            
+            document.getElementById('resultado5').innerHTML = `O valor final a ser pago é: **R$ ${precoFinal.toFixed(2)}**`;
+        }
+    </script>
+</body>
+</html>

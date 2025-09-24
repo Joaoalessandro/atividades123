@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Perda de Carga</title>
+</head>
+<body>
+    <h1>Cálculo de Perda de Carga em Tubulação</h1>
+    
+    <div>
+        <label for="vazao">Vazão (Q):</label>
+        <input type="number" id="vazao" step="0.001" min="0">
+    </div>
+    
+    <div>
+        <label for="diametro">Diâmetro (D):</label>
+        <input type="number" id="diametro" step="0.001" min="0">
+    </div>
+    
+    <div>
+        <label for="coeficiente">Coeficiente de Rugosidade (C):</label>
+        <input type="number" id="coeficiente" step="0.001" min="0">
+    </div>
+    
+    <button onclick="calcularPerdaCarga()">Calcular Perda de Carga</button>
+    
+    <div id="resultado1"></div>
+
+    <script>
+        function calcularPerdaCarga() {
+            const vazao = parseFloat(document.getElementById('vazao').value);
+            const diametro = parseFloat(document.getElementById('diametro').value);
+            const coeficiente = parseFloat(document.getElementById('coeficiente').value);
+            
+            if (isNaN(vazao) || isNaN(diametro) || isNaN(coeficiente) || vazao <= 0 || diametro <= 0 || coeficiente <= 0) {
+                document.getElementById('resultado1').innerHTML = 
+                    'Por favor, digite valores válidos e positivos para todos os campos.';
+                return;
+            }
+            
+            // J = (Q^1.85) * 10.643 * (D^-4.87) * (C^-1.85)
+            const perdaCarga = Math.pow(vazao, 1.85) * 10.643 * Math.pow(diametro, -4.87) * Math.pow(coeficiente, -1.85);
+            
+            document.getElementById('resultado1').innerHTML = 
+                `Perda de Carga (J): ${perdaCarga.toFixed(4)}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador de Triângulos</title>
+</head>
+<body>
+    <h1>Classificador de Triângulos</h1>
+    
+    <div>
+        <label for="valorA">Lado A:</label>
+        <input type="number" id="valorA" min="0">
+    </div>
+    
+    <div>
+        <label for="valorB">Lado B:</label>
+        <input type="number" id="valorB" min="0">
+    </div>
+    
+    <div>
+        <label for="valorC">Lado C:</label>
+        <input type="number" id="valorC" min="0">
+    </div>
+    
+    <button onclick="verificarTriangulo()">Verificar</button>
+    
+    <div id="resultado3"></div>
+
+    <script>
+        function verificarTriangulo() {
+            const valorA = parseFloat(document.getElementById('valorA').value);
+            const valorB = parseFloat(document.getElementById('valorB').value);
+            const valorC = parseFloat(document.getElementById('valorC').value);
+            
+            if (isNaN(valorA) || isNaN(valorB) || isNaN(valorC) || valorA <= 0 || valorB <= 0 || valorC <= 0) {
+                document.getElementById('resultado3').innerHTML = 'Por favor, digite valores positivos válidos para os lados do triângulo.';
+                return;
+            }
+            
+            if (valorA + valorB > valorC && valorA + valorC > valorB && valorB + valorC > valorA) {
+                if (valorA === valorB && valorB === valorC) {
+                    document.getElementById('resultado3').innerHTML = `Os valores formam um **triângulo equilátero**.`;
+                } else if (valorA === valorB || valorA === valorC || valorB === valorC) {
+                    document.getElementById('resultado3').innerHTML = `Os valores formam um **triângulo isósceles**.`;
+                } else {
+                    document.getElementById('resultado3').innerHTML = `Os valores formam um **triângulo escaleno**.`;
+                }
+            } else {
+                document.getElementById('resultado3').innerHTML = `Os valores NÃO formam um triângulo.`;
+            }
+        }
+    </script>
+</body>
+</html>

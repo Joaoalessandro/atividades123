@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Quadrado Perfeito</title>
+</head>
+<body>
+    <h1>Verificador de Quadrado Perfeito</h1>
+    
+    <div>
+        <label for="numero">Digite um número inteiro positivo:</label>
+        <input type="number" id="numero" min="1">
+    </div>
+    
+    <button onclick="verificarQuadradoPerfeito()">Verificar</button>
+    
+    <div id="resultado1"></div>
+
+    <script>
+        function verificarQuadradoPerfeito() {
+            const numero = parseInt(document.getElementById('numero').value);
+            
+            if (isNaN(numero) || numero <= 0) {
+                document.getElementById('resultado1').innerHTML = 'Por favor, digite um número inteiro positivo válido.';
+                return;
+            }
+            
+            const raiz = Math.sqrt(numero);
+            
+            if (Number.isInteger(raiz)) {
+                document.getElementById('resultado1').innerHTML = `O número **${numero}** é um quadrado perfeito, pois sua raiz é ${raiz}.`;
+            } else {
+                document.getElementById('resultado1').innerHTML = `O número **${numero}** não é um quadrado perfeito, pois sua raiz é ${raiz.toFixed(2)}.`;
+            }
+        }
+    </script>
+</body>
+</html>

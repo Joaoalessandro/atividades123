@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preço Final do Carro</title>
+</head>
+<body>
+    <h1>Calculadora de Preço Final do Carro</h1>
+    
+    <div>
+        <label for="precoFabrica">Preço de Fábrica (R$):</label>
+        <input type="number" id="precoFabrica" step="0.01" min="0">
+    </div>
+    
+    <div>
+        <label>Selecione as opções:</label>
+        <div>
+            <input type="checkbox" id="arCondicionado">
+            <label for="arCondicionado">Ar condicionado (R$ 1750,00)</label>
+        </div>
+        <div>
+            <input type="checkbox" id="pinturaMetalica">
+            <label for="pinturaMetalica">Pintura Metálica (R$ 800,00)</label>
+        </div>
+        <div>
+            <input type="checkbox" id="vidroEletrico">
+            <label for="vidroEletrico">Vidro Elétrico (R$ 1200,00)</label>
+        </div>
+        <div>
+            <input type="checkbox" id="direcaoHidraulica">
+            <label for="direcaoHidraulica">Direção Hidráulica (R$ 2000,00)</label>
+        </div>
+    </div>
+    
+    <button onclick="calcularPrecoFinal()">Calcular Preço Final</button>
+    
+    <div id="resultado2"></div>
+
+    <script>
+        function calcularPrecoFinal() {
+            const precoFabrica = parseFloat(document.getElementById('precoFabrica').value);
+            
+            if (isNaN(precoFabrica) || precoFabrica < 0) {
+                document.getElementById('resultado2').innerHTML = 'Por favor, digite um preço de fábrica válido.';
+                return;
+            }
+            
+            let precoFinal = precoFabrica;
+            
+            if (document.getElementById('arCondicionado').checked) {
+                precoFinal += 1750.00;
+            }
+            if (document.getElementById('pinturaMetalica').checked) {
+                precoFinal += 800.00;
+            }
+            if (document.getElementById('vidroEletrico').checked) {
+                precoFinal += 1200.00;
+            }
+            if (document.getElementById('direcaoHidraulica').checked) {
+                precoFinal += 2000.00;
+            }
+            
+            document.getElementById('resultado2').innerHTML = `O preço final do carro é: **R$ ${precoFinal.toFixed(2)}**`;
+        }
+    </script>
+</body>
+</html>
