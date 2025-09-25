@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Contratacheque</title>
+</head>
+<body>
+    <h1>Contracheque</h1>
+    
+    <div>
+        <label for="matricula">Matrícula:</label>
+        <input type="text" id="matricula">
+    </div>
+    <div>
+        <label for="nome">Nome do Funcionário:</label>
+        <input type="text" id="nome">
+    </div>
+    <div>
+        <label for="dependentes">Número de Dependentes:</label>
+        <input type="number" id="dependentes" min="0">
+    </div>
+    <div>
+        <label for="salarioBase">Salário Base (R$):</label>
+        <input type="number" id="salarioBase" step="0.01" min="0">
+    </div>
+    <div>
+        <label for="gratificacao">Valor da Gratificação:</label>
+        <input type="number" id="gratificacao" step="0.01" min="0">
+    </div>
+    
+    <button onclick="calcularContracheque()">Gerar Contracheque</button>
+    
+    <div id="resultado5"></div>
+
+    <script>
+        function calcularContracheque() {
+            const matricula = document.getElementById('matricula').value;
+            const nome = document.getElementById('nome').value;
+            const dependentes = parseInt(document.getElementById('dependentes').value);
+            const salarioBase = parseFloat(document.getElementById('salarioBase').value);
+            const gratificacao = parseFloat(document.getElementById('gratificacao').value);
+            
+            if (matricula === "" || nome === "" || isNaN(dependentes) || dependentes < 0 || isNaN(salarioBase) || salarioBase < 0 || isNaN(gratificacao) || gratificacao < 0) {
+                document.getElementById('resultado5').innerHTML = 'Por favor, preencha todos os campos com valores válidos.';
+                return;
+            }
+            
+            const salarioBruto = salarioBase + gratificacao;
+            let descontoINSS, descontoIRPF;
+
+            // Cálculo do INSS
+            if (salarioBruto <= 1412.00) {
+                descontoINSS = salarioBruto * 0.075;
+            } else if (salarioBruto <= 2666.68) {
+                descontoINSS = salarioBruto * 0.09;
+            } else if (salarioBruto <= 4000.03) {
+                descontoINSS = salarioBruto * 0.12;
+            } else {
+                descontoINSS = salarioBruto * 0.14;
+            }
+
+            // Cálculo do IRPF
+            if (salarioBruto <= 2259.20) {
+                descontoIRPF = 0;
+            } else if (salarioBruto <= 2826.65) {
+                descontoIRPF = salarioBruto * 0.075;
+            } else if (salarioBruto <= 3751.05) {
+                descontoIRPF = salarioBruto * 0.15;
+            } else if (salarioBruto <= 4664.68) {
+                descontoIRPF = salarioBruto * 0.225;
+            } else {
+                descontoIRPF = salarioBruto * 0.275;
+            }
+
+            const descontoDependentes = dependentes * 123.00;
+            const salarioLiquido = salarioBruto - descontoINSS - (descontoIRPF - descontoDependentes);
+            
+            document.getElementById('resultado5').innerHTML = 
+                `**CONTRACHEQUE**<br><br>
+                 Matrícula: **${matricula}**<br>
+                 Nome: **${nome}**<br>
+                 Dependentes: **${dependentes}**<br>
+                 <br>
+                 Salário Base: R$ ${salarioBase.toFixed(2)}<br>
+                 Valor da Gratificação: R$ ${gratificacao.toFixed(2)}<br>
+                 Salário Bruto: R$ ${salarioBruto.toFixed(2)}<br>
+                 <br>
+                 Desconto INSS: R$ ${descontoINSS.toFixed(2)}<br>
+                 Desconto IRPF: R$ ${(descontoIRPF).toFixed(2)}<br>
+                 Desconto por Dependentes: R$ ${descontoDependentes.toFixed(2)}<br>
+                 <br>
+                 Salário Líquido: **R$ ${salarioLiquido.toFixed(2)}**`;
+        }
+    </script>
+</body>
+</html>

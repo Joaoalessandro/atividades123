@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inverter Número de 3 Dígitos</title>
+</head>
+<body>
+    <h1>Inverter Número de 3 Dígitos</h1>
+    
+    <div>
+        <label for="numero">Número (3 dígitos):</label>
+        <input type="number" id="numero" min="100" max="999">
+    </div>
+    
+    <button onclick="inverterNumero()">Inverter</button>
+    
+    <div id="resultado6"></div>
+
+    <script>
+        function inverterNumero() {
+            const numeroOriginal = parseInt(document.getElementById('numero').value);
+            
+            if (isNaN(numeroOriginal) || numeroOriginal < 100 || numeroOriginal > 999) {
+                document.getElementById('resultado6').innerHTML = 
+                    'Por favor, digite um número inteiro de 3 dígitos (de 100 a 999).';
+                return;
+            }
+            
+            const centenas = Math.floor(numeroOriginal / 100);
+            const dezenas = Math.floor((numeroOriginal % 100) / 10);
+            const unidades = numeroOriginal % 10;
+            
+            const numeroInvertido = (unidades * 100) + (dezenas * 10) + centenas;
+            
+            document.getElementById('resultado6').innerHTML = 
+                `Número Lido: ${numeroOriginal}<br>
+                 Número Invertido: ${numeroInvertido}`;
+        }
+    </script>
+</body>
+</html>

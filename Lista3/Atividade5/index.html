@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custo de Carro Novo</title>
+</head>
+<body>
+    <h1>Cálculo de Custo de Carro Novo</h1>
+    
+    <div>
+        <label for="custoFabrica">Custo de Fábrica (R$):</label>
+        <input type="number" id="custoFabrica" step="0.01" min="0">
+    </div>
+    
+    <button onclick="calcularCustoCarro()">Calcular Custo Final</button>
+    
+    <div id="resultado5"></div>
+
+    <script>
+        function calcularCustoCarro() {
+            const custoFabrica = parseFloat(document.getElementById('custoFabrica').value);
+            const percentualDistribuidor = 0.12;
+            const percentualImpostos = 0.30;
+            
+            if (isNaN(custoFabrica) || custoFabrica <= 0) {
+                document.getElementById('resultado5').innerHTML = 
+                    'Por favor, digite um valor válido e positivo para o custo de fábrica.';
+                return;
+            }
+            
+            const valorDistribuidor = custoFabrica * percentualDistribuidor;
+            const valorImpostos = custoFabrica * percentualImpostos;
+            const custoConsumidor = custoFabrica + valorDistribuidor + valorImpostos;
+            
+            document.getElementById('resultado5').innerHTML = 
+                `Custo de Fábrica: R$ ${custoFabrica.toFixed(2)}<br>
+                 Valor do Distribuidor: R$ ${valorDistribuidor.toFixed(2)}<br>
+                 Valor dos Impostos: R$ ${valorImpostos.toFixed(2)}<br>
+                 <br>
+                 Custo Total ao Consumidor: R$ ${custoConsumidor.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

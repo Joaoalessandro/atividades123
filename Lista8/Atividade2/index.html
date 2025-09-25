@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Palíndromos</title>
+</head>
+<body>
+    <h1>Verificador de Palíndromo</h1>
+    
+    <div>
+        <label for="numero">Digite um número de 5 dígitos:</label>
+        <input type="number" id="numero" min="10000" max="99999">
+    </div>
+    
+    <button onclick="verificarPalindromo()">Verificar</button>
+    
+    <div id="resultado2"></div>
+
+    <script>
+        function verificarPalindromo() {
+            const numero = document.getElementById('numero').value;
+            
+            if (numero.length !== 5 || isNaN(parseInt(numero))) {
+                document.getElementById('resultado2').innerHTML = 'Por favor, digite um número válido de 5 dígitos.';
+                return;
+            }
+            
+            const numeroInvertido = numero.split('').reverse().join('');
+            
+            if (numero === numeroInvertido) {
+                document.getElementById('resultado2').innerHTML = `O número **${numero}** é um **palíndromo**.`;
+            } else {
+                document.getElementById('resultado2').innerHTML = `O número **${numero}** não é um palíndromo.`;
+            }
+        }
+    </script>
+</body>
+</html>

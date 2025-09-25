@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifa Bancária</title>
+</head>
+<body>
+    <h1>Calculadora de Tarifa Bancária</h1>
+
+    <div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome">
+    </div>
+    
+    <div>
+        <label for="saldoSemestral">Saldo Semestral Total (R$):</label>
+        <input type="number" id="saldoSemestral" step="0.01">
+    </div>
+    
+    <button onclick="calcularTarifa()">Calcular Tarifa</button>
+    
+    <div id="resultado6"></div>
+
+    <script>
+        function calcularTarifa() {
+            const nome = document.getElementById('nome').value;
+            const saldoSemestral = parseFloat(document.getElementById('saldoSemestral').value);
+            
+            if (nome === "" || isNaN(saldoSemestral) || saldoSemestral < 0) {
+                document.getElementById('resultado6').innerHTML = 'Por favor, preencha todos os campos com valores válidos.';
+                return;
+            }
+
+            const saldoMedioMensal = saldoSemestral / 6;
+            let tarifa;
+
+            if (saldoMedioMensal <= 1000.00) {
+                tarifa = 25.00;
+            } else if (saldoMedioMensal <= 2000.00) {
+                tarifa = 20.00;
+            } else if (saldoMedioMensal <= 3500.00) {
+                tarifa = 13.00;
+            } else {
+                tarifa = 0.00;
+            }
+            
+            document.getElementById('resultado6').innerHTML = 
+                `Nome: **${nome}**<br>
+                 Saldo Médio Mensal: R$ ${saldoMedioMensal.toFixed(2)}<br>
+                 Tarifa Bancária: **R$ ${tarifa.toFixed(2)}**`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador de Triângulos</title>
+</head>
+<body>
+    <h1>Classificador de Triângulos</h1>
+    
+    <div>
+        <label for="ladoA">Lado A:</label>
+        <input type="number" id="ladoA" min="0">
+    </div>
+    
+    <div>
+        <label for="ladoB">Lado B:</label>
+        <input type="number" id="ladoB" min="0">
+    </div>
+    
+    <div>
+        <label for="ladoC">Lado C:</label>
+        <input type="number" id="ladoC" min="0">
+    </div>
+    
+    <button onclick="verificarTipoTriangulo()">Verificar</button>
+    
+    <div id="resultado3"></div>
+
+    <script>
+        function verificarTipoTriangulo() {
+            let a = parseFloat(document.getElementById('ladoA').value);
+            let b = parseFloat(document.getElementById('ladoB').value);
+            let c = parseFloat(document.getElementById('ladoC').value);
+            
+            if (isNaN(a) || isNaN(b) || isNaN(c) || a <= 0 || b <= 0 || c <= 0) {
+                document.getElementById('resultado3').innerHTML = 'Por favor, digite valores positivos válidos para os lados.';
+                return;
+            }
+            
+            // Ordenar os lados para que C seja o maior
+            const lados = [a, b, c].sort((x, y) => x - y);
+            a = lados[0];
+            b = lados[1];
+            c = lados[2];
+            
+            if (a + b <= c) {
+                document.getElementById('resultado3').innerHTML = 'Os lados não formam um triângulo.';
+                return;
+            }
+            
+            const a2 = Math.pow(a, 2);
+            const b2 = Math.pow(b, 2);
+            const c2 = Math.pow(c, 2);
+            
+            if (c2 === a2 + b2) {
+                document.getElementById('resultado3').innerHTML = 'Os lados formam um triângulo **retângulo**.';
+            } else if (c2 > a2 + b2) {
+                document.getElementById('resultado3').innerHTML = 'Os lados formam um triângulo **obtusângulo**.';
+            } else {
+                document.getElementById('resultado3').innerHTML = 'Os lados formam um triângulo **acutângulo**.';
+            }
+        }
+    </script>
+</body>
+</html>

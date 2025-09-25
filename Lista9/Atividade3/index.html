@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculos de Geometria</title>
+</head>
+<body>
+    <h1>Calculadora de Geometria</h1>
+    
+    <div>
+        <label for="figura">Selecione a figura:</label>
+        <select id="figura">
+            <option value="1">1 - Cone Reto</option>
+            <option value="2">2 - Cilindro</option>
+            <option value="3">3 - Esfera</option>
+        </select>
+    </div>
+
+    <div id="coneCampos" class="campo" style="display:none;">
+        <label for="raioCone">Raio (R):</label>
+        <input type="number" id="raioCone" step="0.01">
+        <label for="alturaCone">Altura (H):</label>
+        <input type="number" id="alturaCone" step="0.01">
+    </div>
+
+    <div id="cilindroCampos" class="campo" style="display:none;">
+        <label for="raioCilindro">Raio (R):</label>
+        <input type="number" id="raioCilindro" step="0.01">
+        <label for="alturaCilindro">Altura (H):</label>
+        <input type="number" id="alturaCilindro" step="0.01">
+    </div>
+
+    <div id="esferaCampos" class="campo" style="display:none;">
+        <label for="raioEsfera">Raio (R):</label>
+        <input type="number" id="raioEsfera" step="0.01">
+    </div>
+    
+    <button onclick="calcularGeometria()">Calcular</button>
+    
+    <div id="resultado3"></div>
+
+    <script>
+        document.getElementById('figura').addEventListener('change', function() {
+            document.getElementById('coneCampos').style.display = 'none';
+            document.getElementById('cilindroCampos').style.display = 'none';
+            document.getElementById('esferaCampos').style.display = 'none';
+
+            const figura = this.value;
+            if (figura === '1') {
+                document.getElementById('coneCampos').style.display = 'block';
+            } else if (figura === '2') {
+                document.getElementById('cilindroCampos').style.display = 'block';
+            } else if (figura === '3') {
+                document.getElementById('esferaCampos').style.display = 'block';
+            }
+        });
+
+        function calcularGeometria() {
+            const figura = document.getElementById('figura').value;
+            let volume, areaSuperficie;
+            const PI = Math.PI;
+
+            switch (figura) {
+                case '1': // Cone Reto
+                    const raioCone = parseFloat(document.getElementById('raioCone').value);
+                    const alturaCone = parseFloat(document.getElementById('alturaCone').value);
+                    if (isNaN(raioCone) || isNaN(alturaCone) || raioCone <= 0 || alturaCone <= 0) {
+                        document.getElementById('resultado3').innerHTML = 'Por favor, insira valores válidos para o cone.';
+                        return;
+                    }
+                    const geratriz = Math.sqrt(Math.pow(raioCone, 2) + Math.pow(alturaCone, 2));
+                    volume = (1/3) * PI * Math.pow(raioCone, 2) * alturaCone;
+                    areaSuperficie = PI * raioCone * (raioCone + geratriz);
+                    break;
+                case '2': // Cilindro
+                    const raioCilindro = parseFloat(document.getElementById('raioCilindro').value);
+                    const alturaCilindro = parseFloat(document.getElementById('alturaCilindro').value);
+                    if (isNaN(raioCilindro) || isNaN(alturaCilindro) || raioCilindro <= 0 || alturaCilindro <= 0) {
+                        document.getElementById('resultado3').innerHTML = 'Por favor, insira valores válidos para o cilindro.';
+                        return;
+                    }
+                    volume = PI * Math.pow(raioCilindro, 2) * alturaCilindro;
+                    areaSuperficie = 2 * PI * raioCilindro * (raioCilindro + alturaCilindro);
+                    break;
+                case '3': // Esfera
+                    const raioEsfera = parseFloat(document.getElementById('raioEsfera').value);
+                    if (isNaN(raioEsfera) || raioEsfera <= 0) {
+                        document.getElementById('resultado3').innerHTML = 'Por favor, insira um valor válido para o raio da esfera.';
+                        return;
+                    }
+                    volume = (4/3) * PI * Math.pow(raioEsfera, 3);
+                    areaSuperficie = 4 * PI * Math.pow(raioEsfera, 2);
+                    break;
+                default:
+                    document.getElementById('resultado3').innerHTML = 'Por favor, selecione uma figura.';
+                    return;
+            }
+            
+            document.getElementById('resultado3').innerHTML = 
+                `**Resultados:**<br>
+                 Volume: **${volume.toFixed(2)}**<br>
+                 Área da Superfície: **${areaSuperficie.toFixed(2)}**`;
+        }
+    </script>
+</body>
+</html>

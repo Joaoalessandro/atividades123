@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equação do Segundo Grau</title>
+</head>
+<body>
+    <h1>Calculadora de Equação do Segundo Grau</h1>
+    
+    <div>
+        <label for="coefA">Coeficiente A:</label>
+        <input type="number" id="coefA">
+    </div>
+    
+    <div>
+        <label for="coefB">Coeficiente B:</label>
+        <input type="number" id="coefB">
+    </div>
+
+    <div>
+        <label for="coefC">Coeficiente C:</label>
+        <input type="number" id="coefC">
+    </div>
+    
+    <button onclick="calcularRaizes()">Calcular Raízes</button>
+    
+    <div id="resultado5"></div>
+
+    <script>
+        function calcularRaizes() {
+            const A = parseFloat(document.getElementById('coefA').value);
+            const B = parseFloat(document.getElementById('coefB').value);
+            const C = parseFloat(document.getElementById('coefC').value);
+
+            if (isNaN(A) || isNaN(B) || isNaN(C)) {
+                document.getElementById('resultado5').innerHTML = 'Por favor, digite valores válidos para todos os coeficientes.';
+                return;
+            }
+            
+            const delta = Math.pow(B, 2) - 4 * A * C;
+            
+            let resultadoTexto;
+
+            if (delta < 0) {
+                resultadoTexto = 'RAÍZES IMAGINÁRIAS';
+            } else if (delta === 0) {
+                const raizUnica = (-B + Math.sqrt(delta)) / (2 * A);
+                resultadoTexto = `RAIZ ÚNICA: **${raizUnica.toFixed(2)}**`;
+            } else {
+                const raiz1 = (-B + Math.sqrt(delta)) / (2 * A);
+                const raiz2 = (-B - Math.sqrt(delta)) / (2 * A);
+                resultadoTexto = `RAÍZES DISTINTAS:<br>
+                                  Raiz 1: **${raiz1.toFixed(2)}**<br>
+                                  Raiz 2: **${raiz2.toFixed(2)}**`;
+            }
+            
+            document.getElementById('resultado5').innerHTML = resultadoTexto;
+        }
+    </script>
+</body>
+</html>

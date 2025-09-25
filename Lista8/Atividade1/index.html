@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Telefone</title>
+</head>
+<body>
+    <h1>Verificador de Telefone por Bairro</h1>
+    
+    <div>
+        <label for="bairro">Selecione o Bairro:</label>
+        <select id="bairro">
+            <option value="Oeste">Oeste</option>
+            <option value="Centro">Centro</option>
+            <option value="Sul">Sul</option>
+            <option value="Bueno">Bueno</option>
+            <option value="Campinas">Campinas</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="telefone">Número do Telefone (8 dígitos):</label>
+        <input type="number" id="telefone">
+    </div>
+    
+    <button onclick="verificarTelefone()">Verificar</button>
+    
+    <div id="resultado1"></div>
+
+    <script>
+        function verificarTelefone() {
+            const bairro = document.getElementById('bairro').value;
+            const telefone = document.getElementById('telefone').value;
+            
+            if (telefone.length !== 8 || isNaN(parseInt(telefone))) {
+                document.getElementById('resultado1').innerHTML = 'Por favor, digite um número de telefone válido de 8 dígitos.';
+                return;
+            }
+            
+            const prefixo = telefone.substring(0, 4);
+            let isValid = false;
+            
+            const prefixos = {
+                'Oeste': ['3223', '3225', '3212'],
+                'Centro': ['3223', '3224', '3212'],
+                'Sul': ['3241', '3242', '3243', '3281'],
+                'Bueno': ['3251', '3285'],
+                'Campinas': ['3233', '3291']
+            };
+            
+            if (prefixos[bairro].includes(prefixo)) {
+                isValid = true;
+            }
+            
+            if (isValid) {
+                document.getElementById('resultado1').innerHTML = `O número **${telefone}** está **correto** para o bairro ${bairro}.`;
+            } else {
+                document.getElementById('resultado1').innerHTML = `O número **${telefone}** está **incorreto** para o bairro ${bairro}.`;
+            }
+        }
+    </script>
+</body>
+</html>

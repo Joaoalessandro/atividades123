@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troca de Valores</title>
+</head>
+<body>
+    <h1>Troca de Valores de Variáveis</h1>
+    
+    <div>
+        <label for="valorA">Valor de A:</label>
+        <input type="number" id="valorA">
+    </div>
+    
+    <div>
+        <label for="valorB">Valor de B:</label>
+        <input type="number" id="valorB">
+    </div>
+    
+    <button onclick="trocarValores()">Trocar e Exibir</button>
+    
+    <div id="resultado4"></div>
+
+    <script>
+        function trocarValores() {
+            let valorA = parseFloat(document.getElementById('valorA').value);
+            let valorB = parseFloat(document.getElementById('valorB').value);
+            
+            if (isNaN(valorA) || isNaN(valorB)) {
+                document.getElementById('resultado4').innerHTML = 
+                    'Por favor, digite valores válidos para ambas as variáveis.';
+                return;
+            }
+            
+            const originalA = valorA;
+            const originalB = valorB;
+            
+            const temp = valorA;
+            valorA = valorB;
+            valorB = temp;
+            
+            document.getElementById('resultado4').innerHTML = 
+                `Valores Originais:<br>
+                 A = ${originalA}<br>
+                 B = ${originalB}<br>
+                 <br>
+                 Valores Trocados:<br>
+                 A = ${valorA}<br>
+                 B = ${valorB}`;
+        }
+    </script>
+</body>
+</html>

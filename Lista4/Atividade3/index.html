@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Número Especial</title>
+</head>
+<body>
+    <h1>Verificador de Número Especial</h1>
+    
+    <div>
+        <label for="numero">Digite um número de 4 dígitos:</label>
+        <input type="number" id="numero" min="1000" max="9999">
+    </div>
+    
+    <button onclick="verificarNumeroEspecial()">Verificar</button>
+    
+    <div id="resultado3"></div>
+
+    <script>
+        function verificarNumeroEspecial() {
+            const numero = parseInt(document.getElementById('numero').value);
+            
+            if (isNaN(numero) || numero < 1000 || numero > 9999) {
+                document.getElementById('resultado3').innerHTML = 'Por favor, digite um número válido de 4 dígitos.';
+                return;
+            }
+            
+            const primeirosDigitos = Math.floor(numero / 100);
+            const ultimosDigitos = numero % 100;
+            const soma = primeirosDigitos + ultimosDigitos;
+            const resultado = Math.pow(soma, 2);
+            
+            if (resultado === numero) {
+                document.getElementById('resultado3').innerHTML = `O número **${numero}** tem a característica especial.`;
+            } else {
+                document.getElementById('resultado3').innerHTML = `O número **${numero}** NÃO tem a característica especial.`;
+            }
+        }
+    </script>
+</body>
+</html>

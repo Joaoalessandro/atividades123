@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moedas</title>
+</head>
+<body>
+    <h1>Conversor de Moedas</h1>
+    
+    <div>
+        <label for="valorReais">Valor em Reais (R$):</label>
+        <input type="number" id="valorReais" step="0.01" min="0">
+    </div>
+    
+    <div>
+        <label for="moeda">Selecione a moeda de destino:</label>
+        <select id="moeda">
+            <option value="euro">Euro (R$ 6,617)</option>
+            <option value="libra">Libra Esterlina (R$ 6,816)</option>
+            <option value="dolar">Dólar (R$ 5,071)</option>
+            <option value="iene">Iene (R$ 3,018)</option>
+        </select>
+    </div>
+    
+    <button onclick="converterMoeda()">Converter</button>
+    
+    <div id="resultado1"></div>
+
+    <script>
+        function converterMoeda() {
+            const valorReais = parseFloat(document.getElementById('valorReais').value);
+            const moedaSelecionada = document.getElementById('moeda').value;
+            let valorConvertido;
+            
+            if (isNaN(valorReais) || valorReais < 0) {
+                document.getElementById('resultado1').innerHTML = 'Por favor, digite um valor válido em Reais.';
+                return;
+            }
+            
+            let nomeMoeda, simboloMoeda;
+
+            switch (moedaSelecionada) {
+                case 'euro':
+                    valorConvertido = valorReais / 6.617;
+                    nomeMoeda = 'Euro';
+                    simboloMoeda = '€';
+                    break;
+                case 'libra':
+                    valorConvertido = valorReais / 6.816;
+                    nomeMoeda = 'Libra Esterlina';
+                    simboloMoeda = '£';
+                    break;
+                case 'dolar':
+                    valorConvertido = valorReais / 5.071;
+                    nomeMoeda = 'Dólar';
+                    simboloMoeda = '$';
+                    break;
+                case 'iene':
+                    valorConvertido = valorReais / 3.018;
+                    nomeMoeda = 'Iene';
+                    simboloMoeda = '¥';
+                    break;
+            }
+            
+            document.getElementById('resultado1').innerHTML = `Valor convertido para ${nomeMoeda}: **${simboloMoeda} ${valorConvertido.toFixed(2)}**`;
+        }
+    </script>
+</body>
+</html>

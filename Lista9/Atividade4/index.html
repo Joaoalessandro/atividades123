@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receita de Medicamento</title>
+</head>
+<body>
+    <h1>Calculadora de Dosagem de Medicamento</h1>
+    
+    <div>
+        <label for="tipoPaciente">Selecione o tipo de paciente:</label>
+        <select id="tipoPaciente">
+            <option value="1">1 - Bebê</option>
+            <option value="2">2 - Adolescente</option>
+            <option value="3">3 - Adulto</option>
+            <option value="4">4 - Idoso</option>
+        </select>
+    </div>
+    
+    <button onclick="calcularDosagem()">Calcular Dosagem</button>
+    
+    <div id="resultado4"></div>
+
+    <script>
+        function calcularDosagem() {
+            const tipoPaciente = document.getElementById('tipoPaciente').value;
+            let dosagemMg;
+            
+            switch (tipoPaciente) {
+                case '1':
+                    dosagemMg = 600;
+                    break;
+                case '2':
+                    dosagemMg = 1600;
+                    break;
+                case '3':
+                    dosagemMg = 4600;
+                    break;
+                case '4':
+                    dosagemMg = 2450;
+                    break;
+            }
+            
+            const mgPorMl = 400;
+            const gotasPorMl = 15;
+            
+            const dosagemMl = dosagemMg / mgPorMl;
+            const dosagemGotas = dosagemMl * gotasPorMl;
+            
+            document.getElementById('resultado4').innerHTML = 
+                `**RECEITA**<br>
+                 Dosagem em mg: **${dosagemMg} mg**<br>
+                 Quantidade de gotas: **${dosagemGotas.toFixed(0)} gotas**`;
+        }
+    </script>
+</body>
+</html>

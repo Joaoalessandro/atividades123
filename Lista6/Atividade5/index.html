@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custo de Pulverização</title>
+</head>
+<body>
+    <h1>Calculadora de Custo de Pulverização</h1>
+
+    <div>
+        <label for="nomeFazendeiro">Nome do Fazendeiro:</label>
+        <input type="text" id="nomeFazendeiro">
+    </div>
+    
+    <div>
+        <label for="tipoPulverizacao">Tipo de Pulverização:</label>
+        <select id="tipoPulverizacao">
+            <option value="1">Tipo 1 - Ervas daninhas (R$ 50,00/acre)</option>
+            <option value="2">Tipo 2 - Gafanhotos (R$ 100,00/acre)</option>
+            <option value="3">Tipo 3 - Broca (R$ 150,00/acre)</option>
+            <option value="4">Tipo 4 - Todos os acima (R$ 250,00/acre)</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="area">Área a ser pulverizada (acres):</label>
+        <input type="number" id="area" min="0">
+    </div>
+    
+    <button onclick="calcularCustoPulverizacao()">Calcular Custo</button>
+    
+    <div id="resultado5"></div>
+
+    <script>
+        function calcularCustoPulverizacao() {
+            const nomeFazendeiro = document.getElementById('nomeFazendeiro').value;
+            const tipo = document.getElementById('tipoPulverizacao').value;
+            const area = parseFloat(document.getElementById('area').value);
+            
+            if (nomeFazendeiro === "" || isNaN(area) || area < 0) {
+                document.getElementById('resultado5').innerHTML = 'Por favor, preencha todos os campos com valores válidos.';
+                return;
+            }
+
+            let precoPorAcre;
+            switch (tipo) {
+                case '1': precoPorAcre = 50.00; break;
+                case '2': precoPorAcre = 100.00; break;
+                case '3': precoPorAcre = 150.00; break;
+                case '4': precoPorAcre = 250.00; break;
+            }
+            
+            let custoInicial = area * precoPorAcre;
+            let desconto = 0;
+
+            if (area > 300) {
+                desconto += custoInicial * 0.05;
+            }
+
+            if (custoInicial > 10750.00) {
+                desconto += (custoInicial - 10750.00) * 0.10;
+            }
+
+            const custoFinal = custoInicial - desconto;
+
+            document.getElementById('resultado5').innerHTML = 
+                `Nome do Fazendeiro: **${nomeFazendeiro}**<br>
+                 Valor a ser pago: **R$ ${custoFinal.toFixed(2)}**`;
+        }
+    </script>
+</body>
+</html>
