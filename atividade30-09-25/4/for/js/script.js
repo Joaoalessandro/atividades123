@@ -4,17 +4,17 @@ const numeroInteiro = document.getElementById("inNumeroInteiro");
 function onButtonVerificarPressed() {
     const numero = parseInt(numeroInteiro.value);
     
-    let lista = [];
+    let quantosDivisores = 0;;
     if (isNaN(numero) || numero <= 0) {
         return;
     }
     for (let i = 1; i <= numero; i++) {
         if (numero % i === 0) {
-            lista.push(i);
+           quantosDivisores ++;
 
         }
     }
-     if(lista.length > 2){
+     if(quantosDivisores > 2){
     label.innerHTML = 'Não é primo:';
     }else{
     label.innerHTML = 'É primo:';
