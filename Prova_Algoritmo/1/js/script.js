@@ -7,7 +7,7 @@ function identificarTriangulo() {
     if (inLadoA <= 0 || inLadoA == 0
         || inLadoB == 0 || inLadoC == 0 || inLadoB <= 0 || inLadoC <= 0) {
         outResposta.innerText = "Lados inválidos";
-    } else if (Math.pow(inLadoA, 2) == Math.pow(inLadoB, 2) + Math.pow(inLadoC, 2)) {
+    } else if (Math.pow(inLadoA, 2) == (Math.pow(inLadoB, 2) + Math.pow(inLadoC, 2))) {
             outResposta.innerText = "Triângulo Retângulo";
         } else if (Math.pow(inLadoA, 2) > Math.pow(inLadoB, 2) + Math.pow(inLadoC, 2)) {
             outResposta.innerText = "Triângulo Obtusângulo";
