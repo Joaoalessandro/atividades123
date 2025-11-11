@@ -1,7 +1,6 @@
 class Conjunto {
     #dados = [];
 
-    // verifica se o número já existe no conjunto
     existe(num) {
         for (let n of this.#dados) {
             if (n === num) {
@@ -11,14 +10,12 @@ class Conjunto {
         return false;
     }
 
-    // adiciona se não existir
     add(num) {
         if (!this.existe(num)) {
             this.#dados.push(num);
         }
     }
 
-    // retorna uma cópia dos dados
     itens() {
         const copia = [];
         for (let n of this.#dados) {
@@ -27,7 +24,6 @@ class Conjunto {
         return copia;
     }
 
-    // união de conjuntos
     uniao(outro) {
         const novo = new Conjunto();
         for (let n of this.#dados) {
@@ -40,7 +36,6 @@ class Conjunto {
         return novo;
     }
 
-    // interseção
     inter(outro) {
         const novo = new Conjunto();
         const outros = outro.itens();
@@ -54,7 +49,6 @@ class Conjunto {
         return novo;
     }
 
-    // diferença
     dif(outro) {
         const novo = new Conjunto();
         const outros = outro.itens();
@@ -73,10 +67,10 @@ class Conjunto {
         return novo;
     }
 
-    // igualdade
     igual(outro) {
         const outros = outro.itens();
         if (this.#dados.length !== outros.length) return false;
+
         for (let n of this.#dados) {
             let achou = false;
             for (let m of outros) {
@@ -90,10 +84,8 @@ class Conjunto {
         return true;
     }
 
-    // ordenar
     ordenar() {
         const ordenado = this.itens();
-        // bubble sort simples
         for (let i = 0; i < ordenado.length - 1; i++) {
             for (let j = 0; j < ordenado.length - i - 1; j++) {
                 if (ordenado[j] > ordenado[j + 1]) {
@@ -110,7 +102,6 @@ class Conjunto {
         return novo;
     }
 
-    // exibe o conjunto formatado
     toString() {
         let texto = "[";
         for (let i = 0; i < this.#dados.length; i++) {
@@ -118,7 +109,7 @@ class Conjunto {
             if (i < this.#dados.length - 1) texto += "|";
         }
         texto += "]";
-        if (texto == '[]') return 'φ';
+        if (texto === "[]") return "φ";
         return texto;
     }
 }
@@ -136,40 +127,50 @@ class App {
     ligarBotoes() {
         document.getElementById("btnAddA").onclick = () => this.adicionar("a");
         document.getElementById("btnAddB").onclick = () => this.adicionar("b");
-        document.getElementById("btnUniao").onclick = () => this.mostrar(this.a.uniao(this.b), "União");
+
+        document.getElementById("btnUniao").onclick = () =>
+            this.mostrar(this.a.uniao(this.b), "União");
+
         document.getElementById("btnIntersecao").onclick = () => this.mostrar(this.a.inter(this.b), "Interseção");
+
         document.getElementById("btnDifAB").onclick = () => this.mostrar(this.a.dif(this.b), "A - B");
+
         document.getElementById("btnDifBA").onclick = () => this.mostrar(this.b.dif(this.a), "B - A");
+
         document.getElementById("btnIdentico").onclick = () => {
             this.res.textContent = this.a.igual(this.b)
                 ? "A e B são iguais"
                 : "A e B são diferentes";
         };
-        document.getElementById("btnOrdenado").onclick = () => this.mostrar(this.a.uniao(this.b).ordenar(), "União Ordenada");
+
+        document.getElementById("btnOrdenado").onclick = () =>
+            this.mostrar(this.a.uniao(this.b).ordenar(), "União Ordenada");
     }
 
     adicionar(qual) {
-        let campo;
-        if (qual === "a") {
-            campo = document.getElementById("inputA");
-        } else {
-            campo = document.getElementById("inputB");
-        }
+        let campo = qual === "a"
+            ? document.getElementById("inputA")
+            : document.getElementById("inputB");
 
         const num = parseInt(campo.value);
+        const img = document.getElementById('eduKof');
+
         if (!isNaN(num)) {
             if (qual === "a") this.a.add(num);
             else this.b.add(num);
+
             campo.value = "";
             this.atualizar();
-            document.getElementById('eduKof').style.display = 'none';
-            const meuAudio = document.getElementById("meuAudio");
-  meuAudio.stop();
+
+            img.style.display = "none";
+            let app = new App();
+            app.tocarSom("meuAudioJingle");
 
         } else {
-            document.getElementById('eduKof').style.display = 'block';
-            const meuAudio = document.getElementById("meuAudio");
-  meuAudio.play();
+            img.style.display = "block";
+
+            let app = new App();
+            app.tocarSom("meuAudioJingle");
         }
     }
 
@@ -181,6 +182,21 @@ class App {
     mostrar(conjunto, titulo) {
         this.res.textContent = `${titulo}: ${conjunto.toString()}`;
     }
+
+    tocarSom(id) {
+        //array de todos os audios da pagina para parar
+        const audios = document.querySelectorAll("audio");
+
+        audios.forEach(a => {
+            a.pause();
+            a.currentTime = 0;
+        });
+
+        const audio = document.getElementById(id);
+        if (audio) {
+            audio.play();
+        }
+    }
 }
 
-new App();
+window.meuApp = new App();
