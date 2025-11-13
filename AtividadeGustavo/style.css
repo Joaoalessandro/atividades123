@@ -1,0 +1,9 @@
+.textoLorem{
+    font-size: 30px;
+    font-family: 'Gothic A1';
+    color: red;
+    background-color: black;
+}
+.rounded{
+    width: 400px;
+}
