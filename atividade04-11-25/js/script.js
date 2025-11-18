@@ -170,7 +170,7 @@ class App {
             img.style.display = "block";
 
             let app = new App();
-            app.tocarSom("meuAudioJingle");
+            app.tocarSom("meuAudio");
         }
     }
 
