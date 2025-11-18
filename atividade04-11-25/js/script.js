@@ -131,11 +131,14 @@ class App {
         document.getElementById("btnUniao").onclick = () =>
             this.mostrar(this.a.uniao(this.b), "União");
 
-        document.getElementById("btnIntersecao").onclick = () => this.mostrar(this.a.inter(this.b), "Interseção");
+        document.getElementById("btnIntersecao").onclick = () =>
+            this.mostrar(this.a.inter(this.b), "Interseção");
 
-        document.getElementById("btnDifAB").onclick = () => this.mostrar(this.a.dif(this.b), "A - B");
+        document.getElementById("btnDifAB").onclick = () =>
+            this.mostrar(this.a.dif(this.b), "A - B");
 
-        document.getElementById("btnDifBA").onclick = () => this.mostrar(this.b.dif(this.a), "B - A");
+        document.getElementById("btnDifBA").onclick = () =>
+            this.mostrar(this.b.dif(this.a), "B - A");
 
         document.getElementById("btnIdentico").onclick = () => {
             this.res.textContent = this.a.igual(this.b)
@@ -148,35 +151,38 @@ class App {
     }
 
     adicionar(qual) {
-        let campo = qual === "a"
+        const campo = qual === "a"
             ? document.getElementById("inputA")
             : document.getElementById("inputB");
 
-        const num = parseInt(campo.value);
-        const img = document.getElementById('eduKof');
+        const num = parseInt(campo.value, 10);
+        const img = document.getElementById("eduKof");
 
         if (!isNaN(num)) {
-            if (qual === "a") this.a.add(num);
-            else this.b.add(num);
+            if (qual === "a") {
+                this.a.add(num);
+            } else {
+                this.b.add(num);
+            }
 
             campo.value = "";
             this.atualizar();
 
-            img.style.display = "none";
-            let app = new App();
-            app.tocarSom("meuAudioJingle");
+            if (img) img.style.display = "none";
 
+            // 👇 usa a própria instância, não cria outra
+            this.tocarSom("meuAudioJingle");
         } else {
-            img.style.display = "block";
+            if (img) img.style.display = "block";
 
-            let app = new App();
-            app.tocarSom("meuAudio");
+            // 👇 mesma coisa aqui
+            this.tocarSom("meuAudio");
         }
     }
 
     atualizar() {
-        this.sa.innerHTML = "A = " + this.a.toString();
-        this.sb.innerHTML = "B = " + this.b.toString();
+        this.sa.textContent = "A = " + this.a.toString();
+        this.sb.textContent = "B = " + this.b.toString();
     }
 
     mostrar(conjunto, titulo) {
@@ -184,7 +190,6 @@ class App {
     }
 
     tocarSom(id) {
-        //array de todos os audios da pagina para parar
         const audios = document.querySelectorAll("audio");
 
         audios.forEach(a => {
